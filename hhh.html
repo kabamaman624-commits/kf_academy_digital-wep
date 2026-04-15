@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique KF Academy - Achat</title>
+    <style>
+        /* --- BASES & COULEURS --- */
+        :root {
+            --blue: #1e3a5f;
+            --green: #27ae60;
+            --white: #ffffff;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; padding: 50px; text-align: center; }
+
+        /* --- BOUTON D'APPEL --- */
+        .btn-open {
+            background: var(--blue);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .btn-open:hover { background: var(--green); }
+
+        /* --- LE MODAL (L'arrière-plan noir transparent) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none; /* Caché par défaut */
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        /* --- LA BOITE DU FORMULAIRE --- */
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            text-align: left;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 24px; cursor: pointer; color: #999;
+        }
+
+        /* --- DESIGN DU FORMULAIRE --- */
+        h2 { color: var(--blue); margin-bottom: 20px; font-size: 1.5rem; }
+        
+        .form-group { margin-bottom: 15px; }
+        
+        label { display: block; margin-bottom: 5px; font-weight: 600; color: #555; }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--blue); box-shadow: 0 0 5px rgba(30,58,95,0.2); }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--green);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover { background: #219150; }
+    </style>
+</head>
+<body>
+
+    <h1> ACCEDER AU FORMULAIRE D'ACHAT </h1>
+    <p style="margin-bottom: 30px;">Cliquez sur le bouton pour commander votre cours.</p>
+
+    <button class="btn-open" onclick="toggleModal()">Acheter un cours maintenant</button>
+
+    <div class="modal-overlay" id="purchaseModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleModal()">&times;</span>
+            
+            <h2>Finaliser votre achat</h2>
+            
+            <form action="https://formspree.io/f/mzdkowlw" method="POST">
+                
+                <div class="form-group">
+                    <label>Quel cours souhaitez-vous ?</label>
+                    <select name="cours_choisi" required>
+                        <option value="Dev Web">Développement Web html css & java script (210 000 GNF)</option>
+                        <option value="Marketing">Marketing Digital (100 000 GNF)</option>
+                        <option value="Design">Design & Canva (100 000 GNF)</option>
+                        <option value="word"> office word (100 000 GNF)</option>
+                        <option value="excel">office Excel (100 000 GNF)</option>
+                        <option value="Power point">office Power point (100 000 GNF)</option>
+                        <option value="Acces">office Acces (100 000 GNF)</option>
+                        <option value="Photoshop">Photoshop (150 000 GNF)</option>
+                        <option value="Canva">Canva busness (110 000 GNF)</option>
+                        <option value="sage">Sage Comptable (140 000 GNF)</option>
+                        <option value="gestion des prpojet">Gestion des projet (80 000 GNF)</option>
+                        <option value=""Ressource humaines> Ressource HUMAINES PDF (40 000 GNF)</option>
+                        <option value="Illustrator AI">Illustrator AI (120 000 GNF)</option>
+                        <option value="securite informatique">Cyber Securité (150 000 GNF)</option>
+                        <option value="word press"> Word press (110 000 GNF)</option>
+                        <option value="Cisco">Cisco basse (160 000 GNF)</option>
+                        <option value="BIG data ">BIG DATA (150 000 GNF)</option>
+                        <option value="capcup">Capcut montage video (100 000 GNF)</option>
+                        <option value="linkedin">linkedin (100 000 GNF)</option>
+                        <option value="Django">Django (130 000 GNF)</option>
+                        <option value="HACKING">HACKING (170 000 GNF)</option>
+                        <option value="Auto Entrepreneur"> Auto Entrepreneur (100 000 GNF)</option>
+                        <option value="INdesign">INdesign (140 000 GNF)</option>
+                        <option value="python programation">programation python (140 000 GNF)</option>
+                        <option value="html">html&css (150 000 GNF)</option>
+                        <option value="JAVA SCRIPT"> java spript (95 000 GNF)</option>
+                        <option value="trading">Trinding pdf (70 000 GNF)</option>
+                        <option value="Auto card">AUto card (270 000 GNF)</option>
+                 </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Votre Nom Complet</label>
+                    <input type="text" name="nom" placeholder="Ex: Mamady KABA" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Votre Email</label>
+                    <input type="email" name="email" placeholder="Ex: exemple@mail.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Numéro WhatsApp (pour la livraison)</label>
+                    <input type="tel" name="whatsapp" placeholder="Ex: +224 611 75 53 68" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Message ou question (Optionnel)</label>
+                    <textarea name="message" rows="3" placeholder="Ex: Comment vais-je recevoir les vidéos ?"></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmer la commande</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour ouvrir/fermer le formulaire
+        function toggleModal() {
+            const modal = document.getElementById('purchaseModal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'flex';
+            }
+        }
+
+        // Fermer si on clique en dehors de la boite blanche
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>

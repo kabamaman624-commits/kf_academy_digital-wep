@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KF Digital Academy - Boutique Officielle</title>
+    <style>
+        /* --- VARIABLES ET RESET --- */
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #27ae60;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: #333; scroll-behavior: smooth; }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav a { text-decoration: none; color: #2c3e50; font-weight: 600; transition: 0.3s; }
+        nav a:hover { color: var(--secondary); }
+
+        /* --- SECTION HERO --- */
+        .hero-section { padding: 40px 5%; }
+        .hero-blue-box {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c3e50 100%);
+            border-radius: 30px;
+            padding: 50px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            color: white;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .hero-text { flex: 1.2; }
+        .hero-text h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero-image-top { flex: 1; text-align: center; }
+        .hero-image-top img { max-width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+        /* --- GRILLE DE COURS --- */
+        .courses-container { padding: 60px 5%; max-width: 1400px; margin: 0 auto; }
+        .course-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 30px; 
+        }
+
+        /* --- LA CARTE AVEC IMAGE --- */
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden; /* Pour couper l'image proprement aux coins */
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { transform: translateY(-10px); }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover; /* Image pro sans déformation */
+            display: block;
+        }
+
+        .card-body { padding: 25px; text-align: center; }
+        .card-body h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--primary); }
+        .price { color: var(--secondary); font-size: 1.8rem; font-weight: 800; margin: 10px 0; }
+        .tag { font-size: 0.9rem; color: #7f8c8d; font-weight: bold; margin-bottom: 20px; }
+
+        .btn-buy {
+            display: inline-block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-buy:hover { background: #142944; }
+
+        /* --- MODAL FORMULAIRE --- */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: none;
+            justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: white; padding: 40px; border-radius: 20px;
+            width: 90%; max-width: 450px; position: relative;
+        }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; }
+        
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; 
+        }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary); color: white; padding: 40px; text-align: center; margin-top: 40px; }
+
+        @media (max-width: 768px) {
+            .hero-blue-box { flex-direction: column; text-align: center; }
+            .hero-text h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="accueil">
+        <a href="#" class="logo">KF DIGITAL ACADEMY</a>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#formations">Cours</a></li>
+                <li><a href="https://wa.me/224611755368?text=Bonjour%20KF%20Academy,%20je%20souhaite%20acheter%20le%20cours%20de%20Développement%20Web">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-blue-box">
+            <div class="hero-text">
+                <h1>Maîtrisez le Digital <br>avec KF Academy</h1>
+                <p>Apprenez a développement booster votre competence en informatique, le marketing et le design avec des experts passionnés en Guinée.</p>
+                <a href="#formations" class="btn-buy" style="width:auto; padding:15px 40px; background:var(--secondary);">Découvrir nos cours</a>
+            </div>
+            <div class="hero-image-top">
+                <img src="Gemini.png" alt="Passion Informatique">
+            </div>
+        </div>
+    </section>
+
+    <main class="courses-container" id="formations">
+        <h2 style="text-align:center; margin-bottom:40px; font-size:2rem; color:var(--primary);">Nos Catalogues Vidéo</h2>
+        
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="marketing.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>E-book Marketing Digital</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="html ss java.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>Développement web html css & java scrip</h3>
+                    <div class="price">210 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="canva.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>Design & Canva</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+             
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="word.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>office Word</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="excel.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>office Excel</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="power.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>office Power Point</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="acces.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>Office Acces</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="photoshop.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>Photoschop</h3>
+                    <div class="price">150 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>Auto-Card</h3>
+                    <div class="price">270 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="sage.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>Sage comptable</h3>
+                    <div class="price">140 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="gestion deprojet.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>Gestion de Projet</h3>
+                    <div class="price">80 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="ressource.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>Réssource Humaines</h3>
+                    <div class="price">40 000 GNF</div>
+                    <p class="tag">PDF </p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="AI.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>AI Illustrator </h3>
+                    <div class="price">120 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="cyber.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>Cyber Sécurité</h3>
+                    <div class="price">150 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="word.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>word press</h3>
+                    <div class="price">110 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="cisco.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>Cisco </h3>
+                    <div class="price">160 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="bigdata.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>BIG Data</h3>
+                    <div class="price">150 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="capcut.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3> Capcut Mondage video </h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="lin.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>linkedin</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="django.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>DJANGO</h3>
+                    <div class="price">130 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="hacking.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>HACKING</h3>
+                    <div class="price">170 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="auto.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>Auto Entrepreneur</h3>
+                    <div class="price">100 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="id.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>INdesign</h3>
+                    <div class="price">140 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="python.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>programation python</h3>
+                    <div class="price">140 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="course-grid">
+            
+            <div class="card">
+                <img src="htmlcss.png" alt="Développement Web" class="card-img">
+                <div class="card-body">
+                    <h3>html & css</h3>
+                    <div class="price">150 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="java.png" alt="Marketing Digital" class="card-img">
+                <div class="card-body">
+                    <h3>JAVA Script</h3>
+                    <div class="price">95 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                   
+                     <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="traiding.png" alt="Design Canva" class="card-img">
+                <div class="card-body">
+                    <h3>trading pdf</h3>
+                    <div class="price">70 000 GNF</div>
+                    <p class="tag">PDF & VIDEO</p>
+                    <a href="hhh.html" class="btn-buy">Acheter</a>
+                </div>
+            </div>
+
+        </div>
+        
+    </main>
+
+    
+
+    <footer id="contact">
+        <p>Contact: kabamaman624@gmail.com | +224 611 75 53 68</p>
+        <p style="margin-top:10px; opacity:0.7;">Nos services a la portée de tous  2026 KF Digital Academy - Guinée</p>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('orderModal');
+        const courseInput = document.getElementById('courseInput');
+
+        function openOrder(courseName) {
+            courseInput.value = courseName;
+            modal.style.display = 'flex';
+        }
+
+        function closeOrder() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) closeOrder();
+        }
+    </script>
+
+</body>
+</html>
